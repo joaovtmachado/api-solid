@@ -15,10 +15,10 @@ datasource db {
 }
 
 model User {
+  password_hash String  
   id            String   @id @default(uuid())
   email         String   @unique
   name          String
-  password_hash String
   created_at    DateTime @default(now())
 
   checkins CheckIn[]
@@ -34,7 +34,7 @@ model CheckIn {
   user    User   @relation(fields: [user_id], references: [id])
   user_id String
 
-  gym   Gym    @relation(fields: [gym_id], references: [id])
+  gym    Gym    @relation(fields: [gym_id], references: [id])
   gym_id String
 
   @@map("check_ins")
@@ -47,7 +47,7 @@ model Gym {
   phone       String?
   latitude    Decimal
   longitude   Decimal
-  checkins     CheckIn[]
+  checkins    CheckIn[]
 
   @@map("gyms")
 }
